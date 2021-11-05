@@ -1,6 +1,9 @@
 package hu.clubsWebService.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Club {
@@ -13,8 +16,7 @@ public class Club {
     @ManyToOne
     private Category category;
 
-    public Club(){
-
+    public Club() {
     }
 
     public Long getId() {
@@ -41,12 +43,12 @@ public class Club {
         this.address = address;
     }
 
-    public int getSpace() {
+    public int getGuests() {
         return guests;
     }
 
-    public void setSpace(int space) {
-        this.guests = space;
+    public void setGuests(int guests) {
+        this.guests = guests;
     }
 
     public Category getCategory() {
@@ -64,7 +66,7 @@ public class Club {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", space=" + guests +
-                ", category=" + category +
+                ", catogory=" + category.getName() +
                 '}';
     }
 }

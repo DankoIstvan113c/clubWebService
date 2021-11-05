@@ -9,20 +9,26 @@ import java.util.List;
 
 @Entity
 public class Category {
+
     @Id
     @GeneratedValue
     private int id;
     private String name;
-    private int ageLimit;
+    private int agelimit;
     @OneToMany(mappedBy = "category")
     private List<Club> clubs;
 
     public Category() {
     }
 
-    public List<Club> getClubs(){ return clubs; }
+    public List<Club> getClubs() {
+        return clubs;
+    }
 
-    public void setClub(List<Club> clubs){ this.clubs = clubs; }
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
+    }
+
 
     public int getId() {
         return id;
@@ -40,12 +46,12 @@ public class Category {
         this.name = name;
     }
 
-    public int getAgeLimit() {
-        return ageLimit;
+    public int getAgelimit() {
+        return agelimit;
     }
 
-    public void setAgeLimit(int ageLimit) {
-        this.ageLimit = ageLimit;
+    public void setAgelimit(int agelimit) {
+        this.agelimit = agelimit;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", ageLimit=" + ageLimit +
+                ", ageLimit=" + agelimit +
                 '}';
     }
 }
