@@ -1,5 +1,7 @@
 package hu.clubsWebService.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ public class Category {
     private String name;
     private int agelimit;
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Club> clubs;
 
     public Category() {
