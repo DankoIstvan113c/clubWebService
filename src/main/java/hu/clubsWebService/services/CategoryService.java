@@ -52,4 +52,24 @@ public class CategoryService {
         }
         return true;
     }
+
+    public void deleteCategory(int id) {
+        Optional<Category> category = repository.findById(id);
+        if (category.isPresent()){
+            repository.deleteById(id);
+        } else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public void updateCategory(int id, int agelimit) {
+        Optional<Category> optionalCategory = repository.findById(id);
+        if (optionalCategory.isPresent()){
+            Category category = optionalCategory.get();
+            category.setAgelimit(agelimit);
+            repository.save(category);
+        } else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }
