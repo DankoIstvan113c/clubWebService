@@ -39,6 +39,17 @@ public class CategoryService {
     }
 
     public Category addCategory(Category category) {
-        return repository.save(category);
+        if(isUnique(category.getName()))
+            return repository.save(category);
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+    }
+
+    private boolean isUnique(String name) {
+        List<Category> categories = repository.findAll();
+        for (Category category : categories) {
+            if (category.getName().equals(name))
+                return false;
+        }
+        return true;
     }
 }
