@@ -27,9 +27,15 @@ public class ClubController {
         return service.getClub(id);
     }
 
-    @PostMapping("club")
+    @PostMapping("/club")
     @ResponseStatus(HttpStatus.CREATED)
     public Club addClub(@RequestBody Club club){
         return service.addClub(club);
     }
+
+    @PatchMapping("/clubs/{id}/{guests}/{category}")
+    public Club updateClub(@PathVariable ("id") Long id, @PathVariable("guests") int guests, @PathVariable("category") int category){
+        return service.updateClub(id, guests, category);
+    }
+
 }

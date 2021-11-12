@@ -2,6 +2,7 @@ package hu.clubsWebService.services;
 
 import hu.clubsWebService.domain.Category;
 import hu.clubsWebService.domain.Club;
+import hu.clubsWebService.repositories.CategoryRepository;
 import hu.clubsWebService.repositories.ClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class ClubService {
 
     @Autowired
     private ClubRepository repository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public List<Club> getClubs() {
         return repository.findAllByOrderByName();
@@ -44,4 +48,17 @@ public class ClubService {
         return true;
     }
 
+    public Club updateClub(Long id, int guests, int category) {
+        Optional<Club> optionalClub = repository.findById(id);
+        if (optionalClub.isPresent()){
+            Club updatingClub = optionalClub.get();
+            updatingClub.setGuests(guests);
+            Optional<Category> optionalCategory = categoryRepository.findById(category);
+            if(optionalCategory.isPresent()) {
+                updatingClub.setCategory(optionalCategory.get());
+                return repository.save(updatingClub);
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
 }
